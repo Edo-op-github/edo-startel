@@ -1,28 +1,37 @@
 def caesar_script():
     
     code_input = input("Please, enter a valid sentence:")
-    shift_input = int(input("Please, enter a shift value:"))
+    shift_input = input("Please, enter a shift value:")
     letters = list(code_input)
     text = ""
-    
-    for letter in letters:
-        if not letter.isalpha():
-            text += letter
-        if (ord(letter) < 91 and ord(letter) > 64) and (ord(letter) + shift_input < 91):
-            letter = ord(letter) + shift_input
-            letter = chr(letter)
-            text += letter
-        elif (ord(letter) < 91 and ord(letter) > 64) and (ord(letter) + shift_input > 90):
-            letter = ord(letter) + shift_input - 26
-            letter = chr(letter)
-            text += letter
-        elif (ord(letter)>  96 and ord(letter) < 123) and ord(letter) + shift_input < 123:
-            letter = ord(letter) + shift_input
-            letter = chr(letter)
-            text += letter
-        elif (ord(letter) > 96 and ord(letter) < 123) and (ord(letter) + shift_input > 122):
-            letter = ord(letter) + shift_input - 26
-            letter = chr(letter)
-            text += letter
-    print(text)
+    try:
+        if int(shift_input) < 0:
+            print("You may not use a negative.")
+        if int(shift_input) > 0:
+            shift_input = int(shift_input)
+        if shift_input > 26:
+            shift_input = shift_input % 26
+        for letter in letters:
+            if not letter.isalpha():
+                text += letter
+            if (ord(letter) < 91 and ord(letter) > 64) and (ord(letter) + shift_input < 91):
+                letter = ord(letter) + shift_input
+                letter = chr(letter)
+                text += letter
+            elif (ord(letter) < 91 and ord(letter) > 64) and (ord(letter) + shift_input > 90):
+                letter = ord(letter) + shift_input - 26
+                letter = chr(letter)
+                text += letter
+            elif (ord(letter)>  96 and ord(letter) < 123) and ord(letter) + shift_input < 123:
+                letter = ord(letter) + shift_input
+                letter = chr(letter)
+                text += letter
+            elif (ord(letter) > 96 and ord(letter) < 123) and (ord(letter) + shift_input > 122):
+                letter = ord(letter) + shift_input - 26
+                letter = chr(letter)
+                text += letter
+    except ValueError or TypeError:
+        print("That's not a shift value.")
+    else:
+        print(text)
 caesar_script()
