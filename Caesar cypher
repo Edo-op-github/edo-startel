@@ -5,13 +5,13 @@ def caesar_script():
     letters = list(code_input)
     text = ""
     try:
-        if int(shift_input) < 0:
-            print("You may not use a negative.")
-        if int(shift_input) > 0:
-            shift_input = int(shift_input)
+        shift_input = int(shift_input)
         if shift_input > 26:
             shift_input = shift_input % 26
         for letter in letters:
+            if int(shift_input) < 0:
+                print("You may not use a negative.")
+                break
             if not letter.isalpha():
                 text += letter
             if (ord(letter) < 91 and ord(letter) > 64) and (ord(letter) + shift_input < 91):
