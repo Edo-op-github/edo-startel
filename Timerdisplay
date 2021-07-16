@@ -1,0 +1,59 @@
+from datetime import datetime
+class Timer:
+    def __init__(self, hours, minutes, seconds):
+        self.hours = hours
+        self.minutes = minutes
+        self.seconds = seconds
+
+    def __str__(self):
+        self.hours_str = str(self.hours)
+        self.minutes_str = str(self.minutes)
+        self.seconds_str = str(self.seconds)
+        if len(self.hours_str) == 1:
+            self.hours_str = "0"+self.hours_str
+        if len(self.minutes_str) == 1:
+            self.minutes_str = "0"+self.minutes_str
+        if len(self.seconds_str) == 1:
+            self.seconds_str = "0"+self.seconds_str        
+        result = self.hours_str+":"+self.minutes_str+":"+self.seconds_str
+        
+        return result
+
+    def next_second(self):
+        if self.seconds < 59:
+            self.seconds = self.seconds + 1
+        elif self.seconds == 59:
+            self.seconds = 00
+            if self.minutes < 59:
+                self.minutes = self.minutes +1
+            elif self.minutes == 59:
+                self.minutes = 00
+                if self.hours < 23:
+                    self.hours = self.hours +1
+                elif self.hours == 23:
+                    self.hours = 00
+        return self.hours,self.minutes,self.seconds
+
+
+    def prev_second(self):
+        if self.seconds > 00:
+            self.seconds = self.seconds - 1
+        elif self.seconds == 00:
+            self.seconds = 59
+            if self.minutes > 00:
+                self.minutes = self.minutes -1
+            elif self.minutes == 00:
+                self.minutes = 59
+                if self.hours > 00:
+                    self.hours = self.hours -1
+                elif self.hours == 00:
+                    self.hours = 23
+        
+        return self.hours,self.minutes,self.seconds
+
+timer = Timer(23, 59, 59)
+print(timer)
+timer.next_second()
+print(timer)
+timer.prev_second()
+print(timer)
